@@ -1,0 +1,48 @@
+/* for mobile phones  */
+@media (max-width: 575.98px) {
+	/* header  */
+	.header {
+		height: 95px;
+		border: none;
+	}
+	.menu,
+	.button {
+		display: none;
+	}
+
+	/* main  */
+	.hero {
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.hero__img > img {
+		width: 100vw;
+	}
+
+	.hero__right {
+		padding-left: 20px;
+	}
+
+	.information__primary {
+		font-size: 27px;
+		line-height: 36px;
+	}
+
+	.information__secondary {
+		width: 100vw;
+		font-size: 16px;
+		line-height: 160%;
+        margin-bottom: 20px;
+	}
+
+    .information__buttons{
+        display: block;
+        padding: 13px 114px;
+    }
+
+    .btn__find{
+        margin-bottom: 20px;
+    }
+}
