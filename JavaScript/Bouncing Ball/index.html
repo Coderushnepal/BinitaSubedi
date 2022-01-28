@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Ball!!</title>
+    <!-- styling to canvas -->
+    <style>
+      * {
+        margin: 0;
+        padding: hidden;
+        overflow-x: hidden;
+      }
+
+      canvas {
+        background-color: black;
+      }
+
+      h1 {
+        color: Black;
+        text-align: Center;
+        background-color: brown;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Bouncing ball using Javascript</h1>
+    <canvas></canvas>
+    <!-- scripting -->
+    <script>
+      //get the canvas element
+      const canvas = document.querySelector( 'canvas' );
+
+      //gets the width and height of browser viewport
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      // set the width and height of canvasequal to browser viewport
+      canvas.width = width;
+      canvas.height = height;
+
+      //call the getcontext method to draw 2d shape
+      const ctx = canvas.getContext( '2d' )
+
+      //create Ball Class
+      class Ball {
+        constructor( x, y, velX, velY, color, size ) {
+          this.x = x; //horizontal coordinates where the ball starts on the screen.
+          this.y = y; // Vertical coordinates where the ball starts on the screen.
+          this.velX = velX; //horizontal velocity added to the x coordinate, to mave them on each frame
+          this.velY = velY; // vertical velocity added to the y coordinate to mave on each frame.
+          this.color = color; //each ball gets a color
+          this.size = size; //size of each ball---it,s radius in pixels
+        }
+
+        //create draw function 
+        drawBall() {
+          ctx.beginPath(); //start drawing
+          ctx.fillStyle = this.color; //fill ball shape with given color
+          //x and y is center of the ball
+          //size is radius of the bal
+          //0 is a start point of degree around radius of the ball
+          //2 * Math.PI is an end point which is equivalent to 360
+          ctx.arc( this.x, this.y, this.size, 0, 2 * Math.PI );
+          ctx.fill(); //finish drawing
+        }
+        //create update function
+        //if x and y position os greater than or less than browser viewport than balls turn another direction
+        // we include the size of the ball in the calculation because the x/y coordinates are in the center of the ball, but we want the edge of the ball to bounce off the perimeter
+        updateBall() {
+          if ( ( this.x + this.size ) >= width ) {
+            this.velX = -( this.velX );
+          }
+
+          if ( ( this.x - this.size ) <= 0 ) {
+            this.velX = -( this.velX );
+          }
+
+          if ( ( this.y + this.size ) >= height ) {
+            this.velY = -( this.velY );
+          }
+
+          if ( ( this.y - this.size ) <= 0 ) {
+            this.velY = -( this.velY );
+          }
+
+          //the ball is in effect moved each time this method is called.
+
+          this.x += this.velX;
+          this.y += this.velY;
+        }
+
+      }
+
+      //creating some balls and storing in an array
+      const balls = [];
+
+      while ( balls.length < 25 ) {
+        // create a new instance of Ball class
+        const ball = new Ball( 50, 100, 5, 5, 'blue', 10 );
+        // ball position always drawn at least one ball width
+        // away from the edge of the canvas, to avoid drawing errors
+        balls.push( ball );
+      }
+      //loop function
+      function loop() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
+        ctx.fillRect( 0, 0, width, height );
+
+        for ( let i = 0; i < balls.length; i++ ) {
+          balls[i].drawBall();
+          balls[i].updateBall();
+
+        }
+        requestAnimationFrame( loop );
+      }
+      loop();
+    </script>
+
+  </body>
+
+</html>
