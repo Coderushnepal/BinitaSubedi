@@ -94,13 +94,29 @@
         }
 
       }
+      //creating random number generator function
+      function random( min, max ) {
+        const num = Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+        return num;
+
+
+      }
 
       //creating some balls and storing in an array
       const balls = [];
 
       while ( balls.length < 25 ) {
+
+        let size = random( 10, 20 );
         // create a new instance of Ball class
-        const ball = new Ball( 50, 100, 5, 5, 'blue', 10 );
+        const ball = new Ball(
+          random( size, width - size ),
+          random( size, height - size ),
+          random( -5, 5 ),
+          random( -5, 5 ),
+          `rgb(${random( 0, 255 )},${random( 0, 255 )},${random( 0, 255 )})`,
+          size
+        );
         // ball position always drawn at least one ball width
         // away from the edge of the canvas, to avoid drawing errors
         balls.push( ball );
