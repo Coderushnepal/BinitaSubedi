@@ -1,10 +1,10 @@
 const wordEl = document.getElementById( "word" );
-const wrongLettersEl = document.getElementById( "wrong-letter" );
+const wrongLettersEl = document.getElementById( "wrong-letters" );
 const playAgainBtn = document.getElementById( "play-button" );
 const popup = document.getElementById( "poup-container" );
 const notofication = document.getElementById( "notification-container" );
 const finalMessage = document.getElementById( "final-message" );
-const bodypart = document.querySelectorAll( "body-part" );
+const figureParts = document.querySelectorAll( ".figure-part" );
 
 const words = [
   "Charades",
@@ -27,9 +27,9 @@ let selectedWord = words[Math.floor( Math.random() * words.length )];
 const correctLetters = [];
 const wrongLetters = [];
 
-//display word function 
+//show hidden function
 function displayWord() {
-  wordEl.innerHTML = `${selectedWord.split( "" ).map( ( letter ) => `<span class="letter"> ${correctLetters.includes( letter ) ? letter : ""} </span>` )
+  wordEl.innerHTML = `${selectedWord.split( "" ).map( letter => `<span class="letter"> ${correctLetters.includes( letter ) ? letter : ""} </span>` )
 
     .join( "" )}
 `;
@@ -42,10 +42,10 @@ function displayWord() {
 //wrong letter Function
 function updateWrongLettersEl() {
   wrongLettersEl.innerHTML = `${wrongLetters.length > 0 ? "<p>Wrong</p>" : ""}
-  ${wrongLetters.map( ( letter ) => `<span>${letter}</span>` )}
+  ${wrongLetters.map( letter => `<span>${letter}</span>` )}
   `;
   //display bodypart
-  bodypart.forEach( ( part, index ) => {
+  figureParts.forEach( ( part, index ) => {
     const errors = wrongLetters.length;
     if ( index < errors ) {
       part.style.display = "block";
@@ -55,26 +55,26 @@ function updateWrongLettersEl() {
   } );
 
   //check if lost
-  if ( wrongLetters.length === bodypart.length ) {
-    finalMessage.innerText = "Unfortunately You Lost:(";
+  if ( wrongLetters.length === figureParts.length ) {
+    finalMessage.innerText = "Unfortunately You Lost:";
     popup.style.display = "flex";
   }
 
 }
 //show notification
 function showNotification() {
-  notification.classList.add( "show" ); setTimeout
+  notification.classList.add( "show" );
   setTimeout( () => {
     notification.classList.remove( "show" );
   }, 2000 );
 }
 // keyDown Letter press
-window.addEventListener( "Keydown", ( e ) => {
+window.addEventListener( "Keydown", e => {
   if ( e.KeyCode >= 65 && e.keyCode <= 90 ) {
     const letter = e.key;
     // console.log(letter)
     if ( selectedWord.includes( letter ) ) {
-      if ( !correctLetters.includes( letters ) ) {
+      if ( !correctLetters.includes( letter ) ) {
         correctLetters.push( letter );
         displayWord();
 
@@ -86,6 +86,8 @@ window.addEventListener( "Keydown", ( e ) => {
       if ( !wrongLetters.includes( letter ) ) {
         wrongLetters.push( letter );
         updateWrongLettersEl();
+      } else {
+        showNotification();
       }
 
     }
@@ -102,7 +104,7 @@ playAgainBtn.addEventListener( "click", () => {
 
 } );
 
-displayword();
+displayWord();
 
 
 
