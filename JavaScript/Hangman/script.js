@@ -30,7 +30,6 @@ const wrongLetters = [];
 //show hidden function
 function displayWord() {
   wordEl.innerHTML = `${selectedWord.split( "" ).map( letter => `<span class="letter"> ${correctLetters.includes( letter ) ? letter : ""} </span>` )
-
     .join( "" )}
 `;
   const innerWord = wordEl.innerText.replace( /\n/g, "" );
@@ -105,6 +104,3 @@ playAgainBtn.addEventListener( "click", () => {
 } );
 
 displayWord();
-
-
-

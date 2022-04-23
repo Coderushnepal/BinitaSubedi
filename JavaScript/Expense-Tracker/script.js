@@ -245,7 +245,7 @@ function addTransaction( e ) {
     text.value = '';
     amount.value = '';
   }
-}
+ }
 
 // Generate random ID
 function generateID() {

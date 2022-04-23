@@ -1,0 +1,15 @@
+{
+  "name": "disk_db_crud_operations",
+  "version": "1.0.0",
+  "description": "disk_db",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Binita",
+  "license": "ISC",
+  "dependencies": {
+    "helmet": "^5.0.2",
+    "morgan": "^1.10.0"
+  }
+}
